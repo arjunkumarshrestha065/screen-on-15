@@ -1,18 +1,8 @@
-package com.example.signageplayer com.arjun.signagelauncher
-import com.arjun.signagelauncher.R
+package com.example.signageplayer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
-
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.view.View
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import com.example.signageplayer.R
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
