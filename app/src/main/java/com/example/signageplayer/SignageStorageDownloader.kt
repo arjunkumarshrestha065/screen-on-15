@@ -49,7 +49,7 @@ class SignageStorageDownloader(
     }
 
     private fun guessMimeType(fileName: String): String {
-        val ext = fileName.substringAfterLast('.', '').lowercase()
+        val ext = fileName.substringAfterLast(".", " ").lowercase()
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: "application/octet-stream"
     }
 }
