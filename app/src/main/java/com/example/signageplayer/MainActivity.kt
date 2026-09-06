@@ -1,4 +1,9 @@
-package com.example.signageplayer
+package com.example.signageplayer com.arjun.signagelauncher
+import com.arjun.signagelauncher.R
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
 
 import android.app.Activity
 import android.content.Intent
@@ -24,7 +29,7 @@ class MainActivity : Activity() {
     private lateinit var bridge: AndroidBridge
 
     // IMPORTANT: Replace this URL with your real server player URL.
-    private val playerUrl = "https://signage.yourdomain.com/player.html"
+    private val playerUrl = "https://signage.ads.asianpaints.com.np/player.html"
 
     companion object {
         private const val REQUEST_SELECT_STORAGE = 5001
