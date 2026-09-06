@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.storage.StorageManager
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -17,7 +18,7 @@ import android.webkit.WebViewClient
 class MainActivity : Activity() {
 
     private lateinit var webView: WebView
-    private lateinit var storageManager: SignageStorageManager
+    private lateinit var storageManager: StorageManager
     private lateinit var storageDownloader: SignageStorageDownloader
     private val FILE_PICKER_REQUEST_CODE = 1001
 
@@ -29,8 +30,10 @@ class MainActivity : Activity() {
         // Find WebView
         webView = findViewById(R.id.webView)
 
-        // Initialize storageManager and storageDownloader
-        storageManager = SignageStorageManager(this)
+        // 1. Get Android's built-in StorageManager
+        storageManager = getSystemService(Context.STORAGE_SERVICE) as StorageManager
+
+        // 2. Pass it to SignageStorageDownloader
         storageDownloader = SignageStorageDownloader(this, storageManager)
 
         // Enable full-screen immersive mode for signage
