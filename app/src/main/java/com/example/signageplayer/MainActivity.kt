@@ -2,6 +2,7 @@ package com.example.signageplayer
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -12,12 +13,11 @@ import android.view.WindowInsetsController
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.ProgressBar
-import android.widget.Toast
 
 class MainActivity : Activity() {
 
     private lateinit var webView: WebView
+    private lateinit var storageManager: SignageStorageManager
     private lateinit var storageDownloader: SignageStorageDownloader
     private val FILE_PICKER_REQUEST_CODE = 1001
 
@@ -26,11 +26,12 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Find views
+        // Find WebView
         webView = findViewById(R.id.webView)
 
-        // Initialize helper passing context
-        storageDownloader = SignageStorageDownloader(this)
+        // Initialize storageManager and storageDownloader
+        storageManager = SignageStorageManager(this)
+        storageDownloader = SignageStorageDownloader(this, storageManager)
 
         // Enable full-screen immersive mode for signage
         enableFullScreen()
@@ -54,11 +55,11 @@ class MainActivity : Activity() {
             }
         }
 
-        // Add JavaScript interface if your app communicates with local HTML/JS
+        // Add JavaScript interface for web communication
         webView.addJavascriptInterface(this, "AndroidSignage")
 
-        // Load your signage URL or local file
-        webView.loadUrl("https://google.com") // Replace with your signage URL or local file path
+        // Load your signage URL or local file path
+        webView.loadUrl("https://google.com")
     }
 
     private fun openFilePicker() {
@@ -75,8 +76,7 @@ class MainActivity : Activity() {
         if (requestCode == FILE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
             val uri: Uri? = data?.data
             if (uri != null) {
-                // Pass Uri to downloader or storage handler
-                // storageDownloader.handleFileUri(uri)
+                // Pass Uri to downloader or storage handler if needed
             }
         }
     }
